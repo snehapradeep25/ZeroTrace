@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canteen Compass</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍽️ Canteen Compass</h1>
+            <p>Track, Reduce & Reuse Food Waste</p>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn active" onclick="showPage('home')">Home</button>
+            <button class="nav-btn" onclick="showPage('rate-food')">Rate Food</button>
+            <button class="nav-btn" onclick="showPage('log-waste')">Log Waste</button>
+            <button class="nav-btn" onclick="showPage('leftovers')">Leftovers</button>
+            <button class="nav-btn" onclick="showPage('leaderboard')">Leaderboard</button>
+            <button class="nav-btn" onclick="showPage('dashboard')">Dashboard</button>
+        </div>
+
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <h2>Welcome to Canteen Compass</h2>
+            <p>Your smart food waste management system</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-waste">0</div>
+                    <div>Total Waste (kg)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="meals-rated">0</div>
+                    <div>Meals Rated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="leftovers-available">0</div>
+                    <div>Leftovers Available</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Quick Actions</h3>
+                <button onclick="showPage('rate-food')">Rate Your Last Meal</button>
+                <button onclick="showPage('log-waste')">Log Food Waste</button>
+                <button onclick="showPage('leftovers')">Check Leftovers</button>
+            </div>
+        </div>
+
+        <!-- RATE FOOD PAGE -->
+        <div id="rate-food" class="page">
+            <h2>Rate Your Meal</h2>
+            <p>Help us improve by rating the food you just ate</p>
+
+            <form id="rating-form">
+                <div class="form-group">
+                    <label>Select Meal:</label>
+                    <select id="meal-time" required>
+                        <option value="">Choose meal...</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Dish:</label>
+                    <select id="dish-name" required>
+                        <option value="">Choose dish...</option>
+                        <option value="rice">Rice</option>
+                        <option value="dal">Dal</option>
+                        <option value="sabzi">Sabzi</option>
+                        <option value="roti">Roti</option>
+                        <option value="sambar">Sambar</option>
+                        <option value="rasam">Rasam</option>
+                        <option value="curd">Curd</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Rate this dish:</label>
+                    <div class="star-rating" id="star-rating">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Comments (Optional):</label>
+                    <textarea id="comments" placeholder="Any feedback about the food..."></textarea>
+                </div>
+
+                <button type="submit">Submit Rating</button>
+            </form>
+        </div>
+
+        <!-- LOG WASTE PAGE -->
+        <div id="log-waste" class="page">
+            <h2>Log Food Waste</h2>
+            <p>Record leftover food quantities</p>
+
+            <form id="waste-form">
+                <div class="form-group">
+                    <label>Date:</label>
+                    <input type="date" id="waste-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Meal Time:</label>
+                    <select id="waste-meal" required>
+                        <option value="">Choose meal...</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="dinner">Dinner</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Dish Name:</label>
+                    <select id="waste-dish" required>
+                        <option value="">Choose dish...</option>
+                        <option value="rice">Rice</option>
+                        <option value="dal">Dal</option>
+                        <option value="sabzi">Sabzi</option>
+                        <option value="roti">Roti</option>
+                        <option value="sambar">Sambar</option>
+                        <option value="rasam">Rasam</option>
+                        <option value="curd">Curd</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantity Left:</label>
+                    <input type="number" id="waste-quantity" min="0" step="0.5" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Unit:</label>
+                    <select id="waste-unit" required>
+                        <option value="">Choose unit...</option>
+                        <option value="trays">Trays</option>
+                        <option value="plates">Plates</option>
+                        <option value="buckets">Buckets</option>
+                        <option value="kg">Kilograms</option>
+                    </select>
+                </div>
+
+                <button type="submit">Log Waste</button>
+            </form>
+        </div>
+
+        <!-- LEFTOVERS PAGE -->
+        <div id="leftovers" class="page">
+            <h2>Available Leftovers</h2>
+            <p>Check what food is still available for collection</p>
+
+            <div id="leftovers-list">
+                <!-- Leftovers will be populated here -->
+            </div>
+        </div>
+
+        <!-- LEADERBOARD PAGE -->
+        <div id="leaderboard" class="page">
+            <h2>Hostel Competition</h2>
+            <p>Which hostel is winning the fight against food waste?</p>
+
+            <div class="card">
+                <div id="leaderboard-list">
+                    <!-- Leaderboard will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- DASHBOARD PAGE -->
+        <div id="dashboard" class="page">
+            <h2>Analytics Dashboard</h2>
+            <p>Overview of food waste and ratings</p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="dash-total-waste">0</div>
+                    <div>Total Waste This Week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="dash-avg-rating">0</div>
+                    <div>Average Rating</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="dash-worst-dish">-</div>
+                    <div>Most Wasted Dish</div>
+                </div>
+            </div>
+
+            <!-- Chart Controls -->
+            <div class="chart-controls">
+                <button onclick="showChart('waste-trend')" class="chart-btn active">Waste Trend</button>
+                <button onclick="showChart('dish-waste')" class="chart-btn">Dish Waste</button>
+                <button onclick="showChart('meal-ratings')" class="chart-btn">Meal Ratings</button>
+                <button onclick="showChart('hostel-comparison')" class="chart-btn">Hostel Comparison</button>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="analyticsChart"></canvas>
+            </div>
+
+            <div class="card">
+                <h3>Recent Activity</h3>
+                <div id="recent-activity">
+                    <!-- Recent activity will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
