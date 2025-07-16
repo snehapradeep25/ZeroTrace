@@ -60,17 +60,8 @@ Canteen Compass is a comprehensive web application that helps hostel and canteen
 - **Meal Ratings Overview** - Average satisfaction scores
 - **Hostel Comparison** - Performance metrics across hostels
 - Recent activity feed
-
-## 🚀 Demo
-
-### Screenshots
-*Add screenshots of your application here*
-
-### Live Demo
-*Deploy your application and add the live demo link here*
-
+- 
 ## 🛠️ Installation
-
 ### Prerequisites
 - A modern web browser (Chrome, Firefox, Safari, Edge)
 - A local web server (optional, for development)
