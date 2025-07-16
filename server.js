@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static('public')); // Serve static files
 
 // MongoDB connection
-const MONGODB_URI = 'mongodb+srv://snehapradeep5943:hzQIUNgFDKl13RRz@cluster0.ihgwpqr.mongodb.net/canteen_compass?retryWrites=true&w=majority&appName=Cluster0'
+
 
 
 // MongoDB Models
